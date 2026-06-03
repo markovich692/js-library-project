@@ -14,3 +14,13 @@ function Book(title, author, pages) {
 function addBookToLibrary(title, author, pages) {
   myLibrary.push(new Book(title, author, pages));
 }
+
+addBookToLibrary("Breath", "James N.", 210);
+
+addBookToLibrary("Harry Potter", "J.K. Rowling", 320);
+
+const myLibraryBook = function (library) {
+  library.forEach(function (el, i, arr) {
+    console.log(el);
+  });
+};
