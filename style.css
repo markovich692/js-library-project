@@ -15,3 +15,36 @@ body {
   font-size: 12px;
   line-height: 1.6;
 }
+
+.books-container {
+  background-color: orange;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  padding: 20px 0 20px 0;
+  justify-items: center;
+  align-items: center;
+}
+
+.book-card {
+  width: 250px;
+  background-color: orangered;
+  padding: 20px;
+}
+
+.book-card__field {
+}
+
+.book-card__label {
+}
+
+.book-card__id {
+}
+
+.book-card__title {
+}
+
+.book-card__author {
+}
+
+.book-card__pages {
+}
