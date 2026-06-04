@@ -1,5 +1,10 @@
 "use strict";
 
+const bookForm = document.querySelector(".book-form");
+const bookFormTitle = document.querySelector(".book-form__title");
+const bookFormAuthor = document.querySelector(".book-form__author");
+const bookFormPages = document.querySelector(".book-form__pages");
+
 const id = document.querySelector(".book-card__id");
 const title = document.querySelector(".book-card__title");
 const author = document.querySelector(".book-card__author");
@@ -20,7 +25,7 @@ function addBookToLibrary(title, author, pages) {
   myLibrary.push(new Book(title, author, pages));
 }
 
-addBookToLibrary("Breath", "James N.", 210);
+// addBookToLibrary("Breath", "James N.", 210);
 
 const myLibraryBook = function (library) {
   library.forEach(function (el, i, arr) {
@@ -33,4 +38,4 @@ const myLibraryBook = function (library) {
   });
 };
 
-myLibraryBook(myLibrary);
+// myLibraryBook(myLibrary);
