@@ -6,6 +6,15 @@ const bookFormAuthor = document.querySelector(".book-form__author");
 const bookFormPages = document.querySelector(".book-form__pages");
 const bookFormSubmit = document.querySelector(".book-form__submit");
 
+const booksContainer = document.querySelector(".books-container");
+const bookCard = document.querySelector(".book-card");
+const bookCardField = document.querySelector(".book-card__field");
+const bookCardLabel = document.querySelector(".book-card__label");
+const bookCardId = document.querySelector(".book-card__id");
+const bookCardTitle = document.querySelector(".book-card__title");
+const bookCardAuthor = document.querySelector(".book-card__author");
+const bookCardPages = document.querySelector(".book-card__pages");
+
 const id = document.querySelector(".book-card__id");
 const title = document.querySelector(".book-card__title");
 const author = document.querySelector(".book-card__author");
@@ -50,7 +59,7 @@ const userInput = function () {
 bookForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // Check if myLibrary is empty
+  // Check if myLibrary array contains any book
   if (!myLibrary.length) {
     userInput();
 
@@ -65,7 +74,9 @@ bookForm.addEventListener("submit", function (event) {
     // Adds new book to myLibrary array
     addBookToLibrary(titleInput, authorInput, pagesInput);
 
-    console.log(myLibrary[myLibrary.length - 1]);
+    const myLibraryLength = myLibrary.length - 1;
+
+    console.log();
 
     // Adds newly added book to container
   }
