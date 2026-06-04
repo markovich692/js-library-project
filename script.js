@@ -13,6 +13,10 @@ const pages = document.querySelector(".book-card__pages");
 
 const myLibrary = [];
 
+let titleInput;
+let authorInput;
+let pagesInput;
+
 function Book(title, author, pages) {
   if (!new.target) throw Error("Please use the 'new' keyword to call the function");
   this.id = crypto.randomUUID();
@@ -21,15 +25,14 @@ function Book(title, author, pages) {
   this.pages = pages;
 }
 
-// Creates a Book instance and adds it to myLibrary
+// Creates a Book instance and adds it to myLibrary array
 function addBookToLibrary(title, author, pages) {
   myLibrary.push(new Book(title, author, pages));
 }
 
-const myLibraryBook = function (library) {
+// Takes the book library array and updates the card content
+const displayLibraryBook = function (library) {
   library.forEach(function (el, i, arr) {
-    console.log(el);
-
     id.textContent = el.id;
     title.textContent = el.title;
     author.textContent = el.author;
@@ -37,14 +40,33 @@ const myLibraryBook = function (library) {
   });
 };
 
+const userInput = function () {
+  titleInput = bookFormTitle.value;
+  authorInput = bookFormAuthor.value;
+  pagesInput = bookFormPages.value;
+};
+
+// Handle book form submission
 bookForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const titleInput = bookFormTitle.value;
-  const authorInput = bookFormAuthor.value;
-  const pagesInput = bookFormPages.value;
+  // Check if myLibrary is empty
+  if (!myLibrary.length) {
+    userInput();
 
-  addBookToLibrary(titleInput, authorInput, pagesInput);
+    // Add first book to empty myLibrary array
+    addBookToLibrary(titleInput, authorInput, pagesInput);
 
-  myLibraryBook(myLibrary);
+    // Display new added book on card field
+    displayLibraryBook(myLibrary);
+  } else if (myLibrary.length) {
+    userInput();
+
+    // Adds new book to myLibrary array
+    addBookToLibrary(titleInput, authorInput, pagesInput);
+
+    console.log(myLibrary[myLibrary.length - 1]);
+
+    // Adds newly added book to container
+  }
 });
