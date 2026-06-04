@@ -10,6 +10,19 @@
   <body>
     <h1>Library</h1>
 
+    <form action="" class="book-form">
+      <label for="title" name="title">Title:</label>
+      <input type="text" id="title" class="book-form__title" required />
+
+      <label for="author" name="author">Author:</label>
+      <input type="text" id="author" class="book-form__author" required />
+
+      <label for="pages" name="pages">Pages:</label>
+      <input type="number" id="pages" class="book-form__pages" required />
+
+      <button class="book-form__submit">SUBMIT</button>
+    </form>
+
     <div class="books-container">
       <div class="book-card">
         <p class="book-card__field">
