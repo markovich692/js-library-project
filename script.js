@@ -4,6 +4,7 @@ const bookForm = document.querySelector(".book-form");
 const bookFormTitle = document.querySelector(".book-form__title");
 const bookFormAuthor = document.querySelector(".book-form__author");
 const bookFormPages = document.querySelector(".book-form__pages");
+const bookFormSubmit = document.querySelector(".book-form__submit");
 
 const id = document.querySelector(".book-card__id");
 const title = document.querySelector(".book-card__title");
@@ -25,8 +26,6 @@ function addBookToLibrary(title, author, pages) {
   myLibrary.push(new Book(title, author, pages));
 }
 
-// addBookToLibrary("Breath", "James N.", 210);
-
 const myLibraryBook = function (library) {
   library.forEach(function (el, i, arr) {
     console.log(el);
@@ -38,4 +37,14 @@ const myLibraryBook = function (library) {
   });
 };
 
-// myLibraryBook(myLibrary);
+bookForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const titleInput = bookFormTitle.value;
+  const authorInput = bookFormAuthor.value;
+  const pagesInput = bookFormPages.value;
+
+  addBookToLibrary(titleInput, authorInput, pagesInput);
+
+  myLibraryBook(myLibrary);
+});
