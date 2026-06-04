@@ -20,6 +20,8 @@ const title = document.querySelector(".book-card__title");
 const author = document.querySelector(".book-card__author");
 const pages = document.querySelector(".book-card__pages");
 
+booksContainer.style.opacity = "0";
+
 const myLibrary = [];
 
 let titleInput;
@@ -61,6 +63,8 @@ bookForm.addEventListener("submit", function (event) {
 
   // Check if myLibrary array contains any book
   if (!myLibrary.length) {
+    booksContainer.style.opacity = "1";
+
     userInput();
 
     // Add first book to empty myLibrary array
