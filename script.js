@@ -21,8 +21,6 @@ const title = document.querySelector(".book-card__title");
 const author = document.querySelector(".book-card__author");
 const pages = document.querySelector(".book-card__pages");
 
-booksContainer.style.opacity = "0";
-
 const myLibrary = [];
 
 let titleInput;
@@ -96,11 +94,9 @@ const appendBookCard = function () {
 bookForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // console.log(myLibrary, myLibrary.length);
-
   // Check if myLibrary array contains any book
   if (!myLibrary.length) {
-    booksContainer.style.opacity = "1";
+    booksContainer.classList.remove("hidden");
 
     userInput();
 
@@ -121,4 +117,10 @@ bookForm.addEventListener("submit", function (event) {
     // Display new book card
     appendBookCard();
   }
+});
+
+bookCardDelete.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  console.log("clicked");
 });

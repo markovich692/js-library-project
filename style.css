@@ -25,6 +25,10 @@ body {
   align-items: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .book-card {
   width: 250px;
   background-color: orangered;
