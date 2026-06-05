@@ -27,6 +27,7 @@ const myLibrary = [];
 let titleInput;
 let authorInput;
 let pagesInput;
+let newBook;
 
 function Book(title, author, pages) {
   if (!new.target) throw Error("Please use the 'new' keyword to call the function");
@@ -36,9 +37,16 @@ function Book(title, author, pages) {
   this.pages = pages;
 }
 
+const userInput = function () {
+  titleInput = bookFormTitle.value;
+  authorInput = bookFormAuthor.value;
+  pagesInput = bookFormPages.value;
+};
+
 // Creates a Book instance and adds it to myLibrary array
 function addBookToLibrary(title, author, pages) {
   myLibrary.push(new Book(title, author, pages));
+  console.log(myLibrary);
 }
 
 // Takes the book library array and updates the card content
@@ -51,15 +59,41 @@ const displayLibraryBook = function (library) {
   });
 };
 
-const userInput = function () {
-  titleInput = bookFormTitle.value;
-  authorInput = bookFormAuthor.value;
-  pagesInput = bookFormPages.value;
+const appendBookCard = function () {
+  newBook = myLibrary[myLibrary.length - 1];
+
+  const bookCard = `
+  <div class="book-card">
+    <p class="book-card__field">
+      <span class="book-card__label">id:</span>
+      <span class="book-card__id">${newBook.id}</span>
+    </p>
+
+    <p class="book-card__field">
+      <span class="book-card__label">Title:</span>
+      <span class="book-card__title">${newBook.title}</span>
+    </p>
+
+    <p class="book-card__field">
+      <span class="book-card__label">Author:</span>
+      <span class="book-card__author">${newBook.author}</span>
+    </p>
+
+    <p class="book-card__field">
+      <span class="book-card__label">Pages:</span>
+      <span class="book-card__pages">${newBook.pages}</span>
+    </p>
+  </div>
+`;
+
+  booksContainer.insertAdjacentHTML("beforeend", bookCard);
 };
 
 // Handle book form submission
 bookForm.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  // console.log(myLibrary, myLibrary.length);
 
   // Check if myLibrary array contains any book
   if (!myLibrary.length) {
@@ -73,15 +107,15 @@ bookForm.addEventListener("submit", function (event) {
     // Display new added book on card field
     displayLibraryBook(myLibrary);
   } else if (myLibrary.length) {
+    console.log(myLibrary, myLibrary.length);
+
+    // Takes user input
     userInput();
 
-    // Adds new book to myLibrary array
+    // Add new book to library array
     addBookToLibrary(titleInput, authorInput, pagesInput);
 
-    const myLibraryLength = myLibrary.length - 1;
-
-    console.log();
-
-    // Adds newly added book to container
+    // Display new book card
+    appendBookCard();
   }
 });
