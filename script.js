@@ -14,6 +14,7 @@ const bookCardId = document.querySelector(".book-card__id");
 const bookCardTitle = document.querySelector(".book-card__title");
 const bookCardAuthor = document.querySelector(".book-card__author");
 const bookCardPages = document.querySelector(".book-card__pages");
+const bookCardDelete = document.querySelector(".book-card__delete");
 
 const id = document.querySelector(".book-card__id");
 const title = document.querySelector(".book-card__title");
@@ -83,6 +84,8 @@ const appendBookCard = function () {
       <span class="book-card__label">Pages:</span>
       <span class="book-card__pages">${newBook.pages}</span>
     </p>
+
+    <button class="book-card__delete">Delete card</button>
   </div>
 `;
 
