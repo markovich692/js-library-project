@@ -8,20 +8,23 @@ const bookFormSubmit = document.querySelector(".book-form__submit");
 
 const booksContainer = document.querySelector(".books-container");
 const bookCard = document.querySelector(".book-card");
+
+let bookCardAll;
+
 const bookCardField = document.querySelector(".book-card__field");
 const bookCardLabel = document.querySelector(".book-card__label");
 const bookCardId = document.querySelector(".book-card__id");
 const bookCardTitle = document.querySelector(".book-card__title");
 const bookCardAuthor = document.querySelector(".book-card__author");
 const bookCardPages = document.querySelector(".book-card__pages");
-const bookCardDelete = document.querySelector(".book-card__delete");
+let bookCardDeleteAll = document.querySelectorAll(".book-card__delete");
 
 const id = document.querySelector(".book-card__id");
 const title = document.querySelector(".book-card__title");
 const author = document.querySelector(".book-card__author");
 const pages = document.querySelector(".book-card__pages");
 
-const myLibrary = [];
+let myLibrary = [];
 
 // TEST
 
@@ -29,6 +32,8 @@ let titleInput;
 let authorInput;
 let pagesInput;
 let newBook;
+
+let deleteCard;
 
 function Book(title, author, pages) {
   if (!new.target) throw Error("Please use the 'new' keyword to call the function");
@@ -63,7 +68,7 @@ const appendBookCard = function () {
   newBook = myLibrary[myLibrary.length - 1];
 
   const bookCard = `
-  <div class="book-card data-book-card-id="${newBook.id}">
+  <div class="book-card" data-book-card-id="${newBook.id}">
     <p class="book-card__field">
       <span class="book-card__label">id:</span>
       <span class="book-card__id">${newBook.id}</span>
@@ -91,6 +96,20 @@ const appendBookCard = function () {
   booksContainer.insertAdjacentHTML("beforeend", bookCard);
 };
 
+const removeBook = function () {
+  document.querySelectorAll(".book-card").forEach(function (el, i, arr) {
+    el.addEventListener("click", function (event) {
+      if (event.target.classList.value !== "book-card__delete") return;
+
+      const currentBookCard = this.closest(".book-card");
+
+      currentBookCard.remove();
+
+      myLibrary = myLibrary.filter((book) => book.id !== currentBookCard.dataset.bookCardId);
+    });
+  });
+};
+
 // Handle book form submission
 bookForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -111,6 +130,8 @@ bookForm.addEventListener("submit", function (event) {
 
     // Display new added book on card field
     displayLibraryBook(myLibrary);
+
+    removeBook();
   } else if (myLibrary.length) {
     // Takes user input
     userInput();
@@ -120,11 +141,8 @@ bookForm.addEventListener("submit", function (event) {
 
     // Display new book card
     appendBookCard();
+
+    // Remove existing book from library
+    removeBook();
   }
-});
-
-bookCardDelete.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  console.log("clicked");
 });
