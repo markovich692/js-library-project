@@ -9,15 +9,12 @@ const bookFormSubmit = document.querySelector(".book-form__submit");
 const booksContainer = document.querySelector(".books-container");
 const bookCard = document.querySelector(".book-card");
 
-let bookCardAll;
-
 const bookCardField = document.querySelector(".book-card__field");
 const bookCardLabel = document.querySelector(".book-card__label");
 const bookCardId = document.querySelector(".book-card__id");
 const bookCardTitle = document.querySelector(".book-card__title");
 const bookCardAuthor = document.querySelector(".book-card__author");
 const bookCardPages = document.querySelector(".book-card__pages");
-let bookCardDeleteAll = document.querySelectorAll(".book-card__delete");
 
 const id = document.querySelector(".book-card__id");
 const title = document.querySelector(".book-card__title");
@@ -26,14 +23,10 @@ const pages = document.querySelector(".book-card__pages");
 
 let myLibrary = [];
 
-// TEST
-
 let titleInput;
 let authorInput;
 let pagesInput;
 let newBook;
-
-let deleteCard;
 
 function Book(title, author, pages) {
   if (!new.target) throw Error("Please use the 'new' keyword to call the function");
@@ -106,6 +99,8 @@ const removeBook = function () {
       currentBookCard.remove();
 
       myLibrary = myLibrary.filter((book) => book.id !== currentBookCard.dataset.bookCardId);
+
+      if (!myLibrary.length) booksContainer.classList.add("hidden");
     });
   });
 };
