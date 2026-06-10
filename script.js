@@ -4,6 +4,7 @@ const bookForm = document.querySelector(".book-form");
 const bookFormTitle = document.querySelector(".book-form__title");
 const bookFormAuthor = document.querySelector(".book-form__author");
 const bookFormPages = document.querySelector(".book-form__pages");
+const bookCardReadStatus = document.querySelector("#book-card__read-status");
 
 const booksContainer = document.querySelector(".books-container");
 
@@ -15,6 +16,15 @@ function Book(title, author, pages) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.read;
+
+  this.setReadStatus = function (value) {
+    if (value === true) {
+      this.read = true;
+    } else {
+      this.read = false;
+    }
+  };
 }
 
 function userInput() {
@@ -52,12 +62,36 @@ function appendBookCard(book) {
         <span class="book-card__pages">${book.pages}</span>
       </p>
 
+      <div class="book-card__field">
+        <label class="book-card__read-label">
+          Read:
+            <input
+              type="checkbox"
+              class="book-card__read-checkbox"
+              data-book-card-id=${book.id}
+              ${book.read ? "checked" : ""}
+            />
+        </label>
+      </div>
+
       <button class="book-card__delete">Delete card</button>
     </div>
   `;
 
   booksContainer.insertAdjacentHTML("beforeend", html);
 }
+
+const handleReadStatusToggle = function () {
+  document.querySelectorAll(".book-card__read-checkbox").forEach(function (readCheckbox) {
+    readCheckbox.addEventListener("click", function (event) {
+      myLibrary.forEach(function (book) {
+        if (book.id === event.target.dataset.bookCardId) {
+          book.setReadStatus(event.target.checked);
+        }
+      });
+    });
+  });
+};
 
 function renderLibrary() {
   booksContainer.innerHTML = "";
@@ -69,6 +103,8 @@ function renderLibrary() {
   } else {
     booksContainer.classList.remove("hidden");
   }
+
+  handleReadStatusToggle();
 }
 
 booksContainer.addEventListener("click", function (event) {
